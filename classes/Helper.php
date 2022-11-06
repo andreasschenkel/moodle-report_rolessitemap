@@ -30,21 +30,6 @@ defined('MOODLE_INTERNAL') || die();
 
 class Helper {
     /**
-     * Show all roles that exists in this moodle
-     * This function renders ALL existing roles not only rows that can be assigned to categories.
-     *
-     * @return void
-     * @throws \dml_exception
-     */
-    public function renderallroles(): void {
-        GLOBAL $DB, $OUTPUT;
-        $roles = $DB->get_records('role', null, 'id', 'id, shortname');
-        $data['allRoles'] = $this->convertstdclasstoarray($roles);
-        echo $OUTPUT->render_from_template('report_rolessitemap/allRoles', $data);
-    }
-
-
-    /**
      * Shows all categories and the assigned users with their roles
      *
      * @return void
@@ -52,7 +37,9 @@ class Helper {
      */
     public function rendercategoricesandroles(): void {
         GLOBAL $DB, $OUTPUT;
-        $roles = $DB->get_records('role', null, 'id', 'id, shortname');
+        $systemcontext = \context_system::instance();
+        $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
+        //$roles = $DB->get_records('role', null, 'id', 'id, shortname');
         $categorieslist = \core_course_category::make_categories_list();
         // Now populate $categorieslistandroles with the information to be rendered using mustach-template.
         $categorieslistandroles = [];
@@ -81,6 +68,7 @@ class Helper {
                     "roleid" => $roleassignment->roleid,
                     'roleassignmenteditingurl' => $roleassignmenteditingurl->out(false),
                     "shortname" => $roles[$roleassignment->roleid]->shortname,
+                    "localname" => $roles[$roleassignment->roleid]->localname,
                     "userid" => $roleassignment->userid,
                     "userprofilgurl" => $userprofilgurl->out(false),
                     "username" => fullname($user)

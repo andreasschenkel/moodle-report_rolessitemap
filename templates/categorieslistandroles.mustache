@@ -17,18 +17,18 @@
 {{!
     @template report_rolessitemap/report
 }}
-<div class="categorielistandroles">
-    <h3>{{translations.header.page}}</h3>
+<h3>{{translations.header.page}}</h3>
+<div class='categorielistandroles'>
     {{#categorieslistandroles}}
-        <h3 class="heading"><a href='{{url}}'>{{categoryid}} - {{categoryname}}</a> </h3>
+        <h3 class='heading'><a href='{{url}}'>{{categoryname}} - {{categoryid}}</a> </h3>
         {{#roleassignmentsinthiscategory}}
             {{#counter}}
                 <div class='roleinformation'>
-                    <a href='{{roleassignmenteditingurl}}' target='_blank'>{{shortname}} roleid={{roleid}}</a>
+                    <a href='{{roleassignmenteditingurl}}' target='_blank'>{{shortname}} - {{localname}}</a>
                 </div>
             {{/counter}}
             <div class='userinformation'>
-                <a href='{{userprofilgurl}}' target='_blank'>{{username}} userid={{userid}}</a>
+                <a href='{{userprofilgurl}}' target='_blank'>{{username}} ({{userid}})</a>
             </div>
         {{/roleassignmentsinthiscategory}}
         <br><br>

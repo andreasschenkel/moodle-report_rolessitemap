@@ -43,7 +43,6 @@ if (!has_capability('report/rolessitemap:view', context_system::instance())) {
 
 print $OUTPUT->header();
 $helper = new Helper();
-$helper->renderallroles();
 $helper->rendercategoricesandroles();
 print $OUTPUT->footer();
 
