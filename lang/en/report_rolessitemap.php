@@ -22,12 +22,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Roles Category Sitemap';
-$string['privacy:metadata'] = 'The report rolessitmap plugin does not store any personal data.';
+$string['pluginname'] = 'Roles Sitemap';
+$string['privacy:metadata'] = 'The report_rolessitmap plugin does not store any personal data.';
 $string['rolessitemap:view'] = 'View report';
-$string['isactive'] = 'activate report';
+$string['isactive'] = 'Activate report';
 $string['configisactive'] = 'In order to use this report by users with the correct capability this must be activated.';
-$string['isactiveforsiteadmin'] = 'active for siteadmin';
+$string['isactiveforsiteadmin'] = 'Active for siteadmin';
 $string['configisactiveforsiteadmin'] = 'If the report is not activated but the siteadmin should be able to use, then this has to be activated';
 $string['reportisinactiv_msg'] = 'Report is not activated or missing capability';
 $string['header.page'] = 'Sitemap of categorys and the assigned roles';
