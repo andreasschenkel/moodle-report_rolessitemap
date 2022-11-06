@@ -5,8 +5,7 @@ All users that have roles in the coursecategory context.
 
 
 ## Changelog  
-[v1.0.0]
-initial alpha version
+see file CHANGELOG.md
 
 ## ToDo:
 - optimize layout
