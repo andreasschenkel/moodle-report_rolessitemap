@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version  = 2022080400;
-$plugin->requires = 2018120300; // Requires 3.6.
+$plugin->requires = 2021050700; // Requires 3.11.
 $plugin->component = 'report_rolessitemap';
-$plugin->release = '1.0.0';
+$plugin->release = '1.0.1';
 $plugin->maturity  = MATURITY_ALPHA;
