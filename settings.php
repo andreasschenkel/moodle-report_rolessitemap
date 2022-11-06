@@ -51,11 +51,12 @@ if ($ADMIN->fulltree) {
     ));
 
     GLOBAL $DB;
-    $roles = $DB->get_records('role', null, 'id', 'id, shortname');
+    $systemcontext = \context_system::instance();
+    $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
     foreach ($roles as $role) {
         $settings->add(new admin_setting_configcheckbox(
             'report_rolessitemap/' . 'roleid_' . $role->id,
-            $role->shortname,
+            $role->shortname . ' - ' . $role->localname,
             '',
             1
         ));
