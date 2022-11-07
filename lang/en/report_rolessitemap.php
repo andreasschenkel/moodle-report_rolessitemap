@@ -30,4 +30,4 @@ $string['configisactive'] = 'In order to use this report by users with the corre
 $string['isactiveforsiteadmin'] = 'Active for siteadmin';
 $string['configisactiveforsiteadmin'] = 'If the report is not activated but the siteadmin should be able to use, then this has to be activated';
 $string['reportisinactiv_msg'] = 'Report is not activated or missing capability';
-$string['header.page'] = 'Sitemap of categorys and the assigned roles';
+$string['pageheader'] = 'Sitemap of categorys and the assigned roles';

@@ -29,5 +29,5 @@ $string['isactive'] = 'Bericht aktivieren';
 $string['configisactive'] = 'Wenn aktiviert, dann können Nutzernde mit der Berechtigung rolessitemap:view den den Bericht anzeigen lassen.';
 $string['isactiveforsiteadmin'] = 'Aktivieren für Siteadmins';
 $string['configisactiveforsiteadmin'] = 'Wenn der Report für normale Nutzende NICHT aktiviert ist (isactive=false) aber für Siteadmins aufrufbar sein soll, so dann kann dies hier aktiviert werden.';
-$string['reportisinactiv_msg'] = 'Bereicht ist nicht aktiviert oder Berechtigung fehlt.';
-$string['header.page'] = 'Übersicht der zugewiesenen Rolle in Kursbereichen';
+$string['reportisinactiv_msg'] = 'Bericht ist nicht aktiviert oder Berechtigung fehlt.';
+$string['pageheader'] = 'Übersicht der zugewiesenen Rolle in Kursbereichen';

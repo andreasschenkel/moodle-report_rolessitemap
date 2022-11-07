@@ -50,7 +50,7 @@ if ($ADMIN->fulltree) {
         0
     ));
 
-    GLOBAL $DB;
+    global $DB;
     $systemcontext = \context_system::instance();
     $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
     foreach ($roles as $role) {
@@ -61,5 +61,39 @@ if ($ADMIN->fulltree) {
             1
         ));
     }
+
+
+    $options = array(
+        1  => '1',
+        2  => '2',
+        3  => '3',
+        4  => '4',
+        5  => '5',
+        6  => '6',
+        7  => '7',
+        8  => '8',
+        9  => '9',
+        10 => '10',
+        20 => '20',
+        30 => '30',
+        40 => '40',
+        50 => '50',
+        100 => '100',
+        150 => '150',
+        200 => '200',
+        300 => '300',
+        400 => '400',
+        500 => '500',
+        1000 => '1000'
+    );
+    $settings->add(
+        new admin_setting_configselect(
+            'report_rolessitemap/maxcounter',
+            get_string('maxcounter', 'report_rolessitemap'),
+            get_string('maxcounter_desc', 'report_rolessitemap'),
+            100,
+            $options
+        )
+    );
 
 }

@@ -15,13 +15,13 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- *
+ * This report lists all coursecategories and all users with roles assigned in coursecategories context.
  *
  * @package    report_rolessitemap
  * @copyright  2022 Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use report_rolessitemap\Helper;
+use report_rolessitemap\helper;
 
 require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
@@ -41,9 +41,8 @@ if (!has_capability('report/rolessitemap:view', context_system::instance())) {
     exit;
 }
 
-print $OUTPUT->header();
-$helper = new Helper();
-$helper->rendercategoricesandroles();
-print $OUTPUT->footer();
-
-
+echo $OUTPUT->header();
+$helper = new helper();
+$data = $helper->rendercategoriesandroles();
+echo $OUTPUT->render_from_template('report_rolessitemap/categorieslistandroles', $data);
+echo $OUTPUT->footer();

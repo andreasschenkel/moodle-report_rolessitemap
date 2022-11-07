@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * This helperclass contains the functions for collecting the data an let them rendered by mustache-templates.
  *
  * @package    report_rolessitemap
  * @copyright  2022 Andreas Schenkel
@@ -24,82 +24,74 @@
 
 namespace report_rolessitemap;
 use moodle_url;
-use report_rolessitemap\Misc;
 
 defined('MOODLE_INTERNAL') || die();
 
-class Helper {
+class helper {
     /**
      * Shows all categories and the assigned users with their roles
      *
      * @return void
      * @throws \dml_exception
      */
-    public function rendercategoricesandroles(): void {
-        GLOBAL $DB, $OUTPUT;
+    public function rendercategoriesandroles(): array {
+        global $DB, $OUTPUT;
         $systemcontext = \context_system::instance();
         $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
         //$roles = $DB->get_records('role', null, 'id', 'id, shortname');
         $categorieslist = \core_course_category::make_categories_list();
         // Now populate $categorieslistandroles with the information to be rendered using mustach-template.
         $categorieslistandroles = [];
+        $supportedroles = implode(',' , $this->get_supported_roles());
         foreach ($categorieslist as $categoryid => $categoryname) {
             $context = \context_coursecat::instance($categoryid);
-            $params = array('contextid' => $context->id);
-            $roleassignments = $DB->get_records('role_assignments', $params, 'contextid, roleid, userid', 'id, contextid, roleid, userid');
+            $sql = "SELECT id, contextid, roleid, userid FROM m_role_assignments WHERE contextid = " . $context->id .
+                " and roleid IN " . "($supportedroles)" .
+                " ORDER BY contextid, roleid, userid";
+            $roleassignments = $DB->get_records_sql($sql, null);
             $roleassignmentsasarray = [];
             $oldshortname = "";
+            $counter = 0;
+            $maxcounter = get_config('report_rolessitemap', 'maxcounter' );
             foreach ($roleassignments as $roleassignment) {
-                $counter = false;
-                if (!in_array($roleassignment->roleid, $this->get_supported_roles())) {
-                    continue;
-                }
+                $nextrole = false;
                 if ($roles[$roleassignment->roleid]->shortname != $oldshortname) {
                     $oldshortname = $roles[$roleassignment->roleid]->shortname;
-                    $counter = true;
+                    $nextrole = true;
+                    $counter = 0;
                 }
+                if ($counter >= $maxcounter) {
+                    continue;
+                }
+                $counter = $counter + 1;
                 $roleassignmenteditingurl = new moodle_url('/admin/roles/assign.php',
                     array('contextid' => $context->id , 'roleid' => $roleassignment->roleid));
-                $userprofilgurl = new moodle_url('/user/profile.php',
+                $userprofileurl = new moodle_url('/user/profile.php',
                     array('userid' => $roleassignment->userid));
                 $user = \core_user::get_user($roleassignment->userid,  'username, firstname, lastname');
                 $roleassignmentsasarray[] = [
-                    "counter" => $counter,
-                    "roleid" => $roleassignment->roleid,
+                    'nextrole' => $nextrole,
+                    'roleid' => $roleassignment->roleid,
                     'roleassignmenteditingurl' => $roleassignmenteditingurl->out(false),
-                    "shortname" => $roles[$roleassignment->roleid]->shortname,
-                    "localname" => $roles[$roleassignment->roleid]->localname,
-                    "userid" => $roleassignment->userid,
-                    "userprofilgurl" => $userprofilgurl->out(false),
-                    "username" => fullname($user)
+                    'shortname' => $roles[$roleassignment->roleid]->shortname,
+                    'localname' => $roles[$roleassignment->roleid]->localname,
+                    'userid' => $roleassignment->userid,
+                    'userprofilgurl' => $userprofileurl->out(false),
+                    'username' => fullname($user)
                 ];
             }
             $url = new moodle_url('/course/index.php', array('categoryid' => $categoryid));
             $categorieslistandroles[] = [
-                'categoryid' => "$categoryid",
-                'categoryname' => "$categoryname",
+                'categoryid' => $categoryid,
+                'categoryname' => $categoryname,
                 'url' => $url,
                 'roleassignmentsinthiscategory' => $roleassignmentsasarray
             ];
         }
         $data['categorieslistandroles'] = $categorieslistandroles;
-        $translations['header'] = Misc::translate(['page'], 'report_rolessitemap', 'header.');
-        $data['translations'] = $translations;
-        echo $OUTPUT->render_from_template('report_rolessitemap/categorieslistandroles', $data);
-    }
-
-    /**
-     * Converts an array of stdClass objects in an array of arrays
-     *
-     * @param $roles
-     * @return array
-     */
-    public function convertstdclasstoarray(array $roles): array {
-        $rolesasarray = [];
-        foreach ($roles as $role) {
-            $rolesasarray[] = (array)$role;
-        }
-        return $rolesasarray;
+        $data['pageheader'] = get_string('pageheader', 'report_rolessitemap');
+        $data['maxcounter'] = $maxcounter;
+        return $data;
     }
 
     /**
@@ -109,7 +101,7 @@ class Helper {
      * @throws \dml_exception
      */
     public function get_supported_roles(): array {
-        GLOBAL $DB;
+        global $DB;
         $roles = $DB->get_records('role', null, 'id', 'id');
         $supportedroles = [];
         foreach ($roles as $role) {
