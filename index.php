@@ -26,9 +26,7 @@ use report_rolessitemap\helper;
 require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 require_login();
-// Todo: Do not now if the following code is needed. Has to be checked.
-// admin_externalpage_setup('rolessitemap');
-
+// Todo: admin_externalpage_setup('rolessitemap'); // Do not now if this following code is needed. Has to be checked.
 // Proofing if the report is active or if it is inactive but allowes for siteadmins AND if the user is siteadmin.
 $isactive = get_config('report_rolessitemap', 'isactive');
 $isactiveforsiteadmin = get_config('report_rolessitemap', 'isactiveforsiteadmin');
