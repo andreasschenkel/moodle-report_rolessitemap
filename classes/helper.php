@@ -14,6 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace report_rolessitemap;
+use moodle_url;
+
 /**
  * This helperclass contains the functions for collecting the data an let them rendered by mustache-templates.
  *
@@ -21,12 +24,6 @@
  * @copyright  2022 Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace report_rolessitemap;
-use moodle_url;
-
-defined('MOODLE_INTERNAL') || die();
-
 class helper {
     /**
      * Shows all categories and the assigned users with their roles
@@ -38,7 +35,6 @@ class helper {
         global $DB, $OUTPUT;
         $systemcontext = \context_system::instance();
         $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
-        //$roles = $DB->get_records('role', null, 'id', 'id, shortname');
         $categorieslist = \core_course_category::make_categories_list();
         // Now populate $categorieslistandroles with the information to be rendered using mustach-template.
         $categorieslistandroles = [];

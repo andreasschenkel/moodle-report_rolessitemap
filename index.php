@@ -26,7 +26,7 @@ use report_rolessitemap\helper;
 require(__DIR__.'/../../config.php');
 require_once($CFG->libdir . '/adminlib.php');
 require_login();
-// Todo: Weis nicht mehr wozu folgenden Zeile genutzt wird ... nochmal prüfen und klären.
+// Todo: Do not now if the following code is needed. Has to be checked.
 // admin_externalpage_setup('rolessitemap');
 
 // Proofing if the report is active or if it is inactive but allowes for siteadmins AND if the user is siteadmin.
