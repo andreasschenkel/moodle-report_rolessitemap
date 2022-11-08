@@ -16,6 +16,121 @@
 }}
 {{!
     @template report_rolessitemap/categorieslistandroles
+
+    Example context (json):
+    {
+      "categorieslistandroles": [
+        {
+          "categoryid": 2,
+          "categoryname": "F\u00e4cher",
+          "url": {},
+          "roleassignmentsinthiscategory": [
+            {
+              "nextrole": true,
+              "roleid": "1",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=95&roleid=1",
+              "shortname": "manager",
+              "localname": "Manager\/in",
+              "userid": "3",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=3",
+              "username": "lehrer 01"
+            }
+          ]
+        },
+        {
+          "categoryid": 4,
+          "categoryname": "F\u00e4cher \/ Bio",
+          "url": {},
+          "roleassignmentsinthiscategory": [
+            {
+              "nextrole": true,
+              "roleid": "1",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=97&roleid=1",
+              "shortname": "manager",
+              "localname": "Manager\/in",
+              "userid": "2",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=2",
+              "username": "Admin User"
+            },
+            {
+              "nextrole": true,
+              "roleid": "2",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=97&roleid=2",
+              "shortname": "coursecreator",
+              "localname": "Kursersteller\/in",
+              "userid": "2",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=2",
+              "username": "Admin User"
+            },
+            {
+              "nextrole": false,
+              "roleid": "2",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=97&roleid=2",
+              "shortname": "coursecreator",
+              "localname": "Kursersteller\/in",
+              "userid": "3",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=3",
+              "username": "lehrer 01"
+            },
+            {
+              "nextrole": false,
+              "roleid": "2",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=97&roleid=2",
+              "shortname": "coursecreator",
+              "localname": "Kursersteller\/in",
+              "userid": "4",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=4",
+              "username": "schueler 01"
+            },
+            {
+              "nextrole": false,
+              "roleid": "2",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=97&roleid=2",
+              "shortname": "coursecreator",
+              "localname": "Kursersteller\/in",
+              "userid": "5",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=5",
+              "username": "Peter Pan"
+            },
+            {
+              "nextrole": false,
+              "roleid": "2",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=97&roleid=2",
+              "shortname": "coursecreator",
+              "localname": "Kursersteller\/in",
+              "userid": "6",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=6",
+              "username": "Max Mustermann"
+            },
+            {
+              "nextrole": true,
+              "roleid": "5",
+              "roleassignmenteditingurl": "http:\/\/localhost:8000\/admin\/roles\/assign.php?contextid=97&roleid=5",
+              "shortname": "student",
+              "localname": "Teilnehmer\/in",
+              "userid": "4",
+              "userprofilgurl": "http:\/\/localhost:8000\/user\/profile.php?userid=4",
+              "username": "schueler 01"
+            }
+          ]
+        },
+        {
+          "categoryid": 3,
+          "categoryname": "F\u00e4cher \/ Mathe",
+          "url": {},
+          "roleassignmentsinthiscategory": []
+        },
+        {
+          "categoryid": 1,
+          "categoryname": "Testbereich",
+          "url": {},
+          "roleassignmentsinthiscategory": []
+        }
+      ],
+      "pageheader": "\u00dcbersicht der zugewiesenen Rolle in Kursbereichen",
+      "maxcounter": "50"
+    }
+
 }}
 <h3>{{pageheader}} (max {{maxcounter}} users per role)</h3>
 <div class="report_rolessitemap-report">
