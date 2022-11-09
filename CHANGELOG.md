@@ -1,6 +1,17 @@
 
 
 ## Changelog
+
+[v1.0.4]  
+
+fix typo in userprofileurl
+
+[v1.0.3]
+some fixes
+
+[v1.0.2]  
+some fixes
+
 [v1.0.1]
 
 - add file CHANGELOG.md
