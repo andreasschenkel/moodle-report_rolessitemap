@@ -72,7 +72,7 @@ class helper {
                     'shortname' => $roles[$roleassignment->roleid]->shortname,
                     'localname' => $roles[$roleassignment->roleid]->localname,
                     'userid' => $roleassignment->userid,
-                    'userprofilgurl' => $userprofileurl->out(false),
+                    'userprofileurl' => $userprofileurl->out(false),
                     'username' => fullname($user)
                 ];
             }
