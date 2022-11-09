@@ -99,9 +99,10 @@ class helper {
     public function get_supported_roles(): array {
         global $DB;
         $roles = $DB->get_records('role', null, 'id', 'id');
+        $configuredsupportedroles = explode(',', get_config('report_rolessitemap', 'supportedroles'));
         $supportedroles = [];
         foreach ($roles as $role) {
-            if (get_config('report_rolessitemap', 'roleid_' . $role->id)) {
+            if (in_array($role->id, $configuredsupportedroles)) {
                 $supportedroles[] = $role->id;
             }
         }
