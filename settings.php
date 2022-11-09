@@ -54,12 +54,12 @@ if ($ADMIN->fulltree) {
     $systemcontext = \context_system::instance();
     $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
     foreach ($roles as $role) {
-        $options2[$role->id] = $role->id . " - " . $role->shortname . " - " . $role->localname  ;
+        $options[$role->id] = $role->id . " - " . $role->shortname . " - " . $role->localname;
     }
     $settings->add(new admin_setting_configmultiselect('report_rolessitemap/supportedroles',
         get_string('supportedroles', 'report_rolessitemap'),
         get_string('supportedroles_desc', 'report_rolessitemap'),
-        array_keys($options2), $options2));
+        array_keys($options), $options));
 
     $options = array(
         1  => '1',
