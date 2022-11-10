@@ -73,7 +73,8 @@ class helper {
                     'localname' => $roles[$roleassignment->roleid]->localname,
                     'userid' => $roleassignment->userid,
                     'userprofileurl' => $userprofileurl->out(false),
-                    'username' => fullname($user)
+                    'firstname' => $user->firstname,
+                    'lastname' => $user->lastname
                 ];
             }
             $url = new moodle_url('/course/index.php', array('categoryid' => $categoryid));
