@@ -2,6 +2,10 @@
 
 ## Changelog
 
+[v1.0.5]
+
+fix: do not use fullname()
+
 [v1.0.4]  
 
 fix typo in userprofileurl
