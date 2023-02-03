@@ -23,9 +23,6 @@
  */
 
 defined('MOODLE_INTERNAL') || die;
-require_once(__DIR__ . '/../../config.php');
-require_once($CFG->dirroot . '/' . $CFG->admin . '/roles/lib.php');
-require_login();
 
 // Add a link in the menu reports.
 // Users with capability report/rolessitemap:view' in systemcontext.
@@ -53,13 +50,14 @@ if ($ADMIN->fulltree) {
     global $DB;
     $systemcontext = \context_system::instance();
     $roles = role_fix_names(get_all_roles(), $systemcontext, ROLENAME_ORIGINAL);
+    $allroles = [];
     foreach ($roles as $role) {
-        $options[$role->id] = $role->id . " - " . $role->shortname . " - " . $role->localname;
+        $allroles[$role->id] = $role->id . " - " . $role->shortname . " - " . $role->localname;
     }
     $settings->add(new admin_setting_configmultiselect('report_rolessitemap/supportedroles',
         get_string('supportedroles', 'report_rolessitemap'),
         get_string('supportedroles_desc', 'report_rolessitemap'),
-        array_keys($options), $options));
+        array_keys($allroles), $allroles));
 
     $options = array(
         1  => '1',
