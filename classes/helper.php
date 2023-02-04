@@ -25,8 +25,7 @@ use moodle_url;
  * @copyright  2022 Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class helper
-{
+class helper {
     /**
      * Shows all categories and the assigned users with their roles up to a number of maxcounter users
      *
@@ -48,7 +47,8 @@ class helper
         foreach ($categorieslist as $categoryid => $categoryname) {
             $context = \context_coursecat::instance($categoryid);
             $contextid = $context->id;
-            $sql = "SELECT id, contextid, roleid, userid FROM {role_assignments} WHERE contextid = $contextid and roleid $instatement" .
+            $sql = "SELECT id, contextid, roleid, userid FROM {role_assignments} " .
+                " WHERE contextid = $contextid and roleid $instatement" .
                 " ORDER BY contextid, roleid, userid";
             $roleassignments = $DB->get_records_sql($sql, $params);
             $roleassignmentsasarray = [];
