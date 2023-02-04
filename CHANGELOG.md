@@ -1,6 +1,24 @@
 
 
 ## Changelog
+[v1.0.6]
+
+fixes:  
+
+- fix issue #1 settings.php should either add config.php or have an internal check (not both)
+- fix issue #2 changed m_role_assigments to {role_assignments} and use get_in_or_equal
+- fix issue #3 set PAGE->set_url and set PAGE->set_context
+- fix Line indented incorrectly
+- fix some spaces
+- fix some documentation of function
+
+new:  
+
+- add icons to indicate course categories and users
+
+[v1.0.5]
+
+fix: do not use fullname()
 
 [v1.0.4]  
 
