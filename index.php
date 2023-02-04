@@ -31,14 +31,17 @@ require_login();
 $isactive = get_config('report_rolessitemap', 'isactive');
 $isactiveforsiteadmin = get_config('report_rolessitemap', 'isactiveforsiteadmin');
 $reportisactiveforthisuser = $isactive == "1" || ($isactiveforsiteadmin == "1" && is_siteadmin());
+$systemcontext = context_system::instance();
 if (!$reportisactiveforthisuser) {
     echo get_string("reportisinactiv_msg", 'report_rolessitemap');
     die();
 }
-if (!has_capability('report/rolessitemap:view', context_system::instance())) {
+if (!has_capability('report/rolessitemap:view', $systemcontext)) {
     exit;
 }
 
+$PAGE->set_url('/report/index.php', array());
+$PAGE->set_context($systemcontext);
 echo $OUTPUT->header();
 $helper = new helper();
 $data = $helper->rendercategoriesandroles();
