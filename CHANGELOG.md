@@ -1,7 +1,7 @@
 
 
 ## Changelog
-[v1.0.6]
+[v1.0.6-8]
 
 fixes:  
 
@@ -11,6 +11,7 @@ fixes:
 - fix Line indented incorrectly
 - fix some spaces
 - fix some documentation of function
+- MATURITY_RC
 
 new:  
 
