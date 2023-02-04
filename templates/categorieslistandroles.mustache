@@ -132,19 +132,23 @@
     }
 
 }}
+
 <h3>{{pageheader}} (max {{maxcounter}} users per role)</h3>
 <div class="report_rolessitemap-report">
     {{#categorieslistandroles}}
     <div class="report_rolessitemap-categorieslistandrole">
-        <h3 class="report_rolessitemap-heading"><a href="{{url}}">{{categoryname}} - {{categoryid}}</a> </h3>
+        <h3 class="report_rolessitemap-heading">
+            <i class="fa fa-folder-o" aria-hidden="true"></i>
+            <a href="{{url}}">{{categoryname}} - {{categoryid}}</a>
+        </h3>
         {{#roleassignmentsinthiscategory}}
-
             {{#nextrole}}
                 <div class="report_rolessitemap-roleinformation">
                     <a href="{{roleassignmenteditingurl}}" target="_blank">{{shortname}} - {{localname}}</a>
                 </div>
             {{/nextrole}}
             <div class="report_rolessitemap-userinformation">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
                 <a href="{{userprofileurl}}" target="_blank">{{firstname}} {{lastname}} ({{userid}})</a>
             </div>
         {{/roleassignmentsinthiscategory}}
