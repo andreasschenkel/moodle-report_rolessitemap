@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace report_rolessitemap;
+
 use moodle_url;
 
 /**
@@ -24,9 +25,10 @@ use moodle_url;
  * @copyright  2022 Andreas Schenkel
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class helper {
+class helper
+{
     /**
-     * Shows all categories and the assigned users with their roles
+     * Shows all categories and the assigned users with their roles up to a number of maxcounter users
      *
      * @return void
      * @throws \dml_exception
@@ -38,17 +40,21 @@ class helper {
         $categorieslist = \core_course_category::make_categories_list();
         // Now populate $categorieslistandroles with the information to be rendered using mustach-template.
         $categorieslistandroles = [];
-        $supportedroles = implode(',' , $this->get_supported_roles());
+        $supportedroles = $this->get_supported_roles();
+        if (empty($supportedroles)) {
+            $supportedroles[] = "";
+        }
+        list($instatement, $params) = $DB->get_in_or_equal($supportedroles);
         foreach ($categorieslist as $categoryid => $categoryname) {
             $context = \context_coursecat::instance($categoryid);
-            $sql = "SELECT id, contextid, roleid, userid FROM m_role_assignments WHERE contextid = " . $context->id .
-                " and roleid IN " . "($supportedroles)" .
+            $contextid = $context->id;
+            $sql = "SELECT id, contextid, roleid, userid FROM {role_assignments} WHERE contextid = $contextid and roleid $instatement" .
                 " ORDER BY contextid, roleid, userid";
-            $roleassignments = $DB->get_records_sql($sql, null);
+            $roleassignments = $DB->get_records_sql($sql, $params);
             $roleassignmentsasarray = [];
             $oldshortname = "";
             $counter = 0;
-            $maxcounter = get_config('report_rolessitemap', 'maxcounter' );
+            $maxcounter = get_config('report_rolessitemap', 'maxcounter');
             foreach ($roleassignments as $roleassignment) {
                 $nextrole = false;
                 if ($roles[$roleassignment->roleid]->shortname != $oldshortname) {
@@ -61,10 +67,10 @@ class helper {
                 }
                 $counter = $counter + 1;
                 $roleassignmenteditingurl = new moodle_url('/admin/roles/assign.php',
-                    array('contextid' => $context->id , 'roleid' => $roleassignment->roleid));
+                    array('contextid' => $context->id, 'roleid' => $roleassignment->roleid));
                 $userprofileurl = new moodle_url('/user/profile.php',
                     array('userid' => $roleassignment->userid));
-                $user = \core_user::get_user($roleassignment->userid,  'username, firstname, lastname');
+                $user = \core_user::get_user($roleassignment->userid, 'username, firstname, lastname');
                 $roleassignmentsasarray[] = [
                     'nextrole' => $nextrole,
                     'roleid' => $roleassignment->roleid,
@@ -92,9 +98,9 @@ class helper {
     }
 
     /**
-     * Gets the selected roles that should be supported in this report.
+     * Gets ids of the selected roles that should be supported in this report.
      *
-     * @return array
+     * @return array of ids of the supported roles
      * @throws \dml_exception
      */
     public function get_supported_roles(): array {
