@@ -24,20 +24,16 @@
 use report_rolessitemap\helper;
 
 require(__DIR__.'/../../config.php');
-require_once($CFG->libdir . '/adminlib.php');
-require_login();
+$systemcontext = context_system::instance();
+require_capability('report/rolessitemap:view', $systemcontext);
 // Todo: admin_externalpage_setup('rolessitemap'); // Do not now if this following code is needed. Has to be checked.
-// Proofing if the report is active or if it is inactive but allowes for siteadmins AND if the user is siteadmin.
+// Check if the report is active or if it is inactive but is allowed for siteadmins AND if the user is siteadmin.
 $isactive = get_config('report_rolessitemap', 'isactive');
 $isactiveforsiteadmin = get_config('report_rolessitemap', 'isactiveforsiteadmin');
 $reportisactiveforthisuser = $isactive == "1" || ($isactiveforsiteadmin == "1" && is_siteadmin());
-$systemcontext = context_system::instance();
 if (!$reportisactiveforthisuser) {
     echo get_string("reportisinactiv_msg", 'report_rolessitemap');
     die();
-}
-if (!has_capability('report/rolessitemap:view', $systemcontext)) {
-    exit;
 }
 
 $PAGE->set_url('/report/index.php', array());

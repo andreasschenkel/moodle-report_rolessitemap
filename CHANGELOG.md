@@ -1,6 +1,11 @@
 
 
 ## Changelog
+[v1.0.9]
+
+- use require_capability('report/rolessitemap:view', $systemcontext); in index.php
+
+
 [v1.0.6-8]
 
 fixes:  
