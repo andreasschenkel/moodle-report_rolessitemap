@@ -1,6 +1,11 @@
 
 
 ## Changelog
+[v1.0.10]
+
+- fix missing require_login
+- fix 0px in css
+
 [v1.0.9]
 
 - use require_capability('report/rolessitemap:view', $systemcontext); in index.php
