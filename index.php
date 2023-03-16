@@ -24,6 +24,7 @@
 use report_rolessitemap\helper;
 
 require(__DIR__.'/../../config.php');
+require_login();
 $systemcontext = context_system::instance();
 require_capability('report/rolessitemap:view', $systemcontext);
 // Todo: admin_externalpage_setup('rolessitemap'); // Do not now if this following code is needed. Has to be checked.
