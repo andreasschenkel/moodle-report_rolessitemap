@@ -67,9 +67,9 @@ class helper {
                 }
                 $counter = $counter + 1;
                 $roleassignmenteditingurl = new moodle_url('/admin/roles/assign.php',
-                    array('contextid' => $context->id, 'roleid' => $roleassignment->roleid));
+                    ['contextid' => $context->id, 'roleid' => $roleassignment->roleid]);
                 $userprofileurl = new moodle_url('/user/profile.php',
-                    array('userid' => $roleassignment->userid));
+                    ['userid' => $roleassignment->userid]);
                 $user = \core_user::get_user($roleassignment->userid, 'username, firstname, lastname');
                 $roleassignmentsasarray[] = [
                     'nextrole' => $nextrole,
@@ -80,15 +80,15 @@ class helper {
                     'userid' => $roleassignment->userid,
                     'userprofileurl' => $userprofileurl->out(false),
                     'firstname' => $user->firstname,
-                    'lastname' => $user->lastname
+                    'lastname' => $user->lastname,
                 ];
             }
-            $url = new moodle_url('/course/index.php', array('categoryid' => $categoryid));
+            $url = new moodle_url('/course/index.php', ['categoryid' => $categoryid]);
             $categorieslistandroles[] = [
                 'categoryid' => $categoryid,
                 'categoryname' => $categoryname,
                 'url' => $url,
-                'roleassignmentsinthiscategory' => $roleassignmentsasarray
+                'roleassignmentsinthiscategory' => $roleassignmentsasarray,
             ];
         }
         $data['categorieslistandroles'] = $categorieslistandroles;
