@@ -37,7 +37,7 @@ if (!$reportisactiveforthisuser) {
     die();
 }
 
-$PAGE->set_url('/report/index.php', array());
+$PAGE->set_url('/report/index.php', []);
 $PAGE->set_context($systemcontext);
 echo $OUTPUT->header();
 $helper = new helper();

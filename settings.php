@@ -59,7 +59,7 @@ if ($ADMIN->fulltree) {
         get_string('supportedroles_desc', 'report_rolessitemap'),
         array_keys($allroles), $allroles));
 
-    $options = array(
+    $options = [
         1  => '1',
         2  => '2',
         3  => '3',
@@ -80,8 +80,8 @@ if ($ADMIN->fulltree) {
         300 => '300',
         400 => '400',
         500 => '500',
-        1000 => '1000'
-    );
+        1000 => '1000',
+    ];
     $settings->add(
         new admin_setting_configselect(
             'report_rolessitemap/maxcounter',
