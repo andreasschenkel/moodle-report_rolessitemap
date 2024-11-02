@@ -23,12 +23,11 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-$capabilities = array(
-    'report/rolessitemap:view' => array(
+$capabilities = [
+    'report/rolessitemap:view' => [
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-        ),
-    ),
-);
+        'archetypes' => [],
+    ],
+];
