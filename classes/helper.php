@@ -87,7 +87,7 @@ class helper {
             $categorieslistandroles[] = [
                 'categoryid' => $categoryid,
                 'categoryname' => $categoryname,
-                'url' => $url,
+                'url' => $url->out(),
                 'roleassignmentsinthiscategory' => $roleassignmentsasarray,
             ];
         }
