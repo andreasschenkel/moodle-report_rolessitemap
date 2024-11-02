@@ -1,6 +1,11 @@
 
 
 ## Changelog
+[v2.0.0]
+
+- tested with moodle 4.0.5
+
+
 [v1.0.10]
 
 - fix missing require_login
