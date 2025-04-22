@@ -1,6 +1,11 @@
 
 
 ## Changelog
+[v5.0.1]
+
+- tested with moodle 5.0.0
+
+
 [v2.0.0]
 
 - tested with moodle 4.0.5
